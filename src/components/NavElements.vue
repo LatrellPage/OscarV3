@@ -1,22 +1,27 @@
 <template>
-    <div :class="nav-container">
-        <div :class="nav-element">Pc</div>
-        <div :class="nav-element">Accessories</div>
-        <div :class="nav-element">Discover</div>
-        <div :class="nav-element">Shop</div>
+    <div class="nav-container">
+        <div class="nav-element" @mouseenter="handleHover('Pc')" @mouseleave="handleHover(null)">Pc</div>
+        <div class="nav-element" @mouseenter="handleHover('Accessories')" @mouseleave="handleHover(null)">Accessories</div>
+        <div class="nav-element" @mouseenter="handleHover('Discover')" @mouseleave="handleHover(null)">Discover</div>
+        <div class="nav-element" @mouseenter="handleHover('Shop')" @mouseleave="handleHover(null)">Shop</div>
     </div>
 </template>
 
 <script>
+import { mapMutations } from 'vuex';
+
     export default {
 	
 	data() {
 		return {
-
+            hoveredItem: null,
 		};
 	},
 	methods: {
-		
+		...mapMutations(['setHoveredItem']),
+        handleHover(item) {
+            this.setHoveredItem(item)
+        }
 	},
 	
 };
@@ -24,14 +29,28 @@
 
 <style>
 .nav-container{
-    width: '50%';
-    display: 'flex';
-    justify-content: 'space-between';
+    height: 100%;
+    width: 30%;
+    display: flex;
+    justify-content: space-between;
 }
 
 .nav-element{
-    width: auto;
+    transition: 0.5s ease;
+    font-size: 0.9rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 2px;
+    padding: 5px;
+    width: 25%;
     margin: auto;
-    color: white;
+    cursor: pointer;
+    transition: background-color 1s ease;
 }
+
+.nav-element:hover{
+    background-color:#dddddd94 ;
+}
+
 </style>
