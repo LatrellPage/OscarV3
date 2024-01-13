@@ -1,14 +1,14 @@
 <template>
     <div class="nav-container">
-        <div class="nav-element" @mouseenter="handleHover('Pc')" @mouseleave="handleHover(null)">Pc</div>
-        <div class="nav-element" @mouseenter="handleHover('Accessories')" @mouseleave="handleHover(null)">Accessories</div>
-        <div class="nav-element" @mouseenter="handleHover('Discover')" @mouseleave="handleHover(null)">Discover</div>
-        <div class="nav-element" @mouseenter="handleHover('Shop')" @mouseleave="handleHover(null)">Shop</div>
+        <div class="nav-element"  @mouseenter="handleHover('Pc')" >Pc</div>
+        <div class="nav-element" @mouseenter="handleHover('Accessories')" >Accessories</div>
+        <div class="nav-element" @mouseenter="handleHover('Discover')" >Discover</div>
+        <div class="nav-element" @mouseenter="handleHover('Shop')" >Shop</div>
     </div>
 </template>
 
 <script>
-import { mapMutations } from 'vuex';
+import { mapActions, mapState} from 'vuex';
 
     export default {
 	
@@ -17,10 +17,13 @@ import { mapMutations } from 'vuex';
             hoveredItem: null,
 		};
 	},
+    computed: {
+        ...mapState(['hoveredItem']),
+    },
 	methods: {
-		...mapMutations(['setHoveredItem']),
+		...mapActions(['changeHoveredItem']),
         handleHover(item) {
-            this.setHoveredItem(item)
+            this.changeHoveredItem(item)
         }
 	},
 	

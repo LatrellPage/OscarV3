@@ -29,7 +29,48 @@
 				</div>
 			</div>
 
-			<div class="dropdown" :style="dropDownStyle">Hello</div>
+			<div class="dropdown" @mouseleave="handleHover(null)" :style="dropDownStyle">
+				<div class="dropdown-container">
+					<div :style="{width: '80%',height: '70%', display: 'grid', gridTemplateColumns: '1fr 1fr 1fr 1fr', gridTemplateRows: 'auto', gap: '1rem'}">
+
+						<div class="dropdown-card"><img src="../../Assets/Images/DropDownImages/PC/Alienware Aurora R15.avif" alt="Description of Image 2">
+							<div class="card-info">
+								<h2 class="img-title">Alienware Aurora R15</h2>
+							</div>
+						</div>
+						
+						<div class="dropdown-card"><img src="../../Assets/Images/DropDownImages/PC/Daily Deal VR 17k.webp" alt="Description of Image 2">
+							<div class="card-info">
+								<h2 class="img-title">Daily Deal VR 17k</h2>
+							</div>
+						</div>
+						<div class="dropdown-card"><img src="../../Assets/Images/DropDownImages/PC/Gaming RDY EMRBR201.webp" alt="Description of Image 3">
+							<div class="card-info">
+								<h3 class="img-title">Gaming RDY EMRBR201</h3>
+							</div>
+						</div>
+						<div class="dropdown-card"><img src="../../Assets/Images/DropDownImages/PC/Creator PC Ultimate.webp" alt="Description of Image 4">
+							<div class="card-info">
+								<h4 class="img-title">Creator PC Ultimate</h4>
+							</div>
+						</div>
+					</div>
+
+					<div :style="{width: '20%',height: '70%', borderLeft: '0.5px solid #ddd', marginLeft: '1rem', padding: '10px'}">
+						<ul class="dropdown-ordered-list">
+							<li><router-link to="/" class="dropdown-nav-link">Alienware</router-link></li>
+							<li><router-link to="/" class="dropdown-nav-link">Asus ROG</router-link></li>
+							<li><router-link to="/" class="dropdown-nav-link">MSI</router-link></li>
+							<li><router-link to="/" class="dropdown-nav-link">Acer Predator</router-link></li>
+							<li><router-link to="/" class="dropdown-nav-link">HP Omen</router-link></li>
+							<li><router-link to="/" class="dropdown-nav-link">iBUYPOWER</router-link></li>
+							<li><router-link to="/" class="dropdown-nav-link">Corsair</router-link></li>
+							<li><router-link to="/" class="dropdown-nav-link">CyberPowerPC</router-link></li>
+						</ul>
+
+					</div>
+				</div>
+			</div>
 		</div>
 		<video
 			:style="videoStyle"
@@ -57,7 +98,7 @@
 
 <script>
 import NavElements from "@/components/NavElements.vue";
-import { mapState } from 'vuex';
+import { mapState, mapActions } from 'vuex';
 
 export default {
 	computed: {
@@ -82,7 +123,12 @@ export default {
 	components: {
 		NavElements,
 	},
-
+	methods: {
+		...mapActions(['changeHoveredItem']),
+		handleHover(item){
+			this.changeHoveredItem(item)
+		}
+	},
 	data() {
 		return {
 			headerAd: "header-ad",
@@ -95,6 +141,13 @@ export default {
 body {
 	margin: 0;
 	padding: 0;
+	overflow: hidden;
+}
+
+img {
+	object-fit: cover;
+	width: 100%;
+	height:100%;
 	overflow: hidden;
 }
 
@@ -123,7 +176,7 @@ h1 {
 	z-index: 999;
 	font-size: 0.5rem;
 	background-repeat: no-repeat;
-	height: 2.5rem;
+	height: 3rem;
 }
 
 .landing_page_navbar {
@@ -160,10 +213,54 @@ h1 {
 
 .dropdown {
 	z-index: 999;
-    display: block;
+    display: flex;
+	justify-content: center;
     background-color: white;
     width: 100%; 
     transition: height 0.5s ease, opacity 1s ease;
+}
+
+.dropdown-container{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 90%;
+	height: 100%;
+}
+
+.dropdown-card{
+	display: grid;
+	grid-template-rows: 80% 20%;
+}
+
+.card-info{
+	padding: la5px;
+}
+
+.img-title{
+	width: 100%;
+	font-size: 1rem;
+	font-weight: 600;
+	color: #333333d1;
+}
+
+.dropdown-ordered-list {
+	list-style-type: none;
+}
+
+.dropdown-ordered-list li {
+	margin-top: 0.5rem;
+}
+
+.dropdown-nav-link{
+	text-decoration: none;
+	color: black;
+	font-size: 0.8rem;
+	font-weight: 550;
+}
+
+.dropdown-nav-link:hover{
+	border-bottom:3px solid black ;
 }
 
 .centered-container {
@@ -174,7 +271,6 @@ h1 {
 	left: 50%;
 	transform: translate(-50%, -50%);
 }
-
 
 .bottom-container{
 	width: 100%;

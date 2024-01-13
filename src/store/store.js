@@ -6,6 +6,11 @@ const store = createStore({
             hoveredItem: null
         }
     },
+    actions: {
+        changeHoveredItem({commit}, item){
+            commit ('setHoveredItem', item);
+        }
+    },
     mutations: {
         setHoveredItem(state, item) {
             state.hoveredItem = item
