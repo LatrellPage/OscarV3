@@ -46,5 +46,3 @@ The shopping cart experience should be user-friendly, with the ability to save c
 The 3D PC builder should provide accurate visualizations and compatibility checks for selected components.
 The website should have fast load times, including for the 3D builder, to maintain a smooth user experience.
 Product pages must contain detailed specs, high-quality images, customer reviews, and related product suggestions.
-
-
