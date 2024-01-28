@@ -1,42 +1,69 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { NavContext } from "../context/NavContext";
 import NavElements from "../components/NavElements";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { library } from '@fortawesome/fontawesome-svg-core';
-import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
-import { faCircleUser } from '@fortawesome/free-regular-svg-icons';
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
+import { faCircleUser } from "@fortawesome/free-regular-svg-icons";
 import { Link } from "react-router-dom";
 import "../landingPage.css";
-import blackLogo from '../logos/blackLogo.svg';
-import whiteLogo from '../logos/whiteLogo.svg';
-
+import { ReactComponent as BlackLogo } from "../blackLogo.svg";
+import { ReactComponent as WhiteLogo } from "../whiteLogo.svg";
+import {
+	pcDropdownLinks,
+	accessoriesDropdownLinks,
+	shopDropdownLinks,
+} from "../context/NavResources";
 
 library.add(faMagnifyingGlass, faCircleUser);
 
 const LandingPage = () => {
-	const { hoveredItem, setHoveredItem } = useContext(NavContext);
+	const { state, dispatch } = useContext(NavContext);
+
+	const handleNavChange = (NavType) => {
+		dispatch({ type: NavType });
+	};
 
 	const videoStyle = {
 		position: "fixed",
 		width: "100%",
 		height: "100%",
 		objectFit: "cover",
-		filter: hoveredItem !== null ? "blur(20px)" : "",
+		filter:
+			state.currentNavArray && state.currentNavArray.length !== 0
+				? "blur(20px)"
+				: "",
 		transition: "filter 1.5s ease",
 	};
+
+	const [dropdownLinksArray, setDropDownLinks] = useState([]);
+
+	useEffect(() => {
+		if (state.type === "Pc") {
+			setDropDownLinks(pcDropdownLinks);
+		} else if (state.type === "Accessories") {
+			setDropDownLinks(accessoriesDropdownLinks);
+		} else if (state.type === "Shop") {
+			setDropDownLinks(shopDropdownLinks);
+		} else {
+			setDropDownLinks([]);
+		}
+	}, [state.type]);
 
 	return (
 		<div>
 			<div className="parent-positioner-container">
 				<div
+					onMouseEnter={() => handleNavChange("")}
 					className="header-ad"
 					style={
-						hoveredItem !== null
+						state.currentNavArray &&
+						state.currentNavArray.length !== 0
 							? { backgroundColor: "black" }
 							: {
 									background:
 										"linear-gradient(to bottom right, rgb(57, 18, 94), #000000)",
-							}
+							  }
 					}
 				>
 					<h1
@@ -52,7 +79,7 @@ const LandingPage = () => {
 							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 						</span>
 						<Link
-						to="/"
+							to="/"
 							style={{
 								fontWeight: "600",
 								color: "white",
@@ -60,7 +87,7 @@ const LandingPage = () => {
 								cursor: "pointer",
 								fontSize: "1rem",
 								paddingBottom: "1px",
-								textDecoration: "none"
+								textDecoration: "none",
 							}}
 						>
 							See Details
@@ -70,30 +97,28 @@ const LandingPage = () => {
 				<div
 					className="landing_page_navbar"
 					style={
-						hoveredItem !== null
+						state.currentNavArray &&
+						state.currentNavArray.length !== 0
 							? {
 									backgroundColor: "white",
 									color: "black",
 									fontWeight: 600,
-							}
+							  }
 							: { color: "whitesmoke", fontWeight: 500 }
 					}
 				>
 					<div className="svg-logo-container">
-						<img
-							src={
-								hoveredItem !== null? {blackLogo}: {whiteLogo}
-							}
-							alt=""
-							className="svg-logo"
-						/>
+						{state.currentNavArray && state.currentNavArray.length
+						!== 0 ? <BlackLogo className="svg-logo" />
+						: <WhiteLogo className="svg-logo" />}
 					</div>
 					<NavElements />
 					<div className="icon-container">
 						<FontAwesomeIcon
 							icon="magnifying-glass"
 							style={
-								hoveredItem !== null
+								state.currentNavArray &&
+								state.currentNavArray.length !== 0
 									? { color: "black", cursor: "pointer" }
 									: { color: "white", cursor: "pointer" }
 							}
@@ -101,17 +126,18 @@ const LandingPage = () => {
 						<FontAwesomeIcon
 							icon={["far", "circle-user"]}
 							style={
-								hoveredItem !== null
+								state.currentNavArray &&
+								state.currentNavArray.length !== 0
 									? {
 											color: "black",
 											cursor: "pointer",
 											fontSize: "1.2rem",
-									}
+									  }
 									: {
 											color: "white",
 											cursor: "pointer",
 											fontSize: "1.2rem",
-									}
+									  }
 							}
 						/>
 					</div>
@@ -119,9 +145,9 @@ const LandingPage = () => {
 
 				<div
 					className="dropdown"
-					onMouseLeave={() => setHoveredItem(null)}
 					style={
-						hoveredItem !== null
+						state.currentNavArray &&
+						state.currentNavArray.length !== 0
 							? { height: "60vh", opacity: 1 }
 							: { height: "0vh", opacity: 0 }
 					}
@@ -135,55 +161,24 @@ const LandingPage = () => {
 								gridTemplateColumns: "1fr 1fr 1fr 1fr",
 								gridTemplateRows: "auto",
 								gap: "1rem",
+								paddingRight: "15px",
 							}}
 						>
-							<div className="dropdown-card">
-								<img
-									src="../assets/Images/DropDownImages/PC/Alienware Aurora R15.avif"
-									alt="Alienware Aurora R15"
-								/>
-								<div className="card-info">
-									<h2 className="img-title">
-										Alienware Aurora R15
-									</h2>
-								</div>
-							</div>
-
-							<div className="dropdown-card">
-								<img
-									src="../assets/Images/DropDownImages/PC/Daily Deal VR 17k.webp"
-									alt="Daily Deal VR 17k"
-								/>
-								<div className="card-info">
-									<h2 className="img-title">
-										Daily Deal VR 17k
-									</h2>
-								</div>
-							</div>
-
-							<div className="dropdown-card">
-								<img
-									src="../assets/Images/DropDownImages/PC/Gaming RDY EMRBR201.webp"
-									alt="Gaming RDY EMRBR201"
-								/>
-								<div className="card-info">
-									<h3 className="img-title">
-										Gaming RDY EMRBR201
-									</h3>
-								</div>
-							</div>
-
-							<div className="dropdown-card">
-								<img
-									src="../assets/Images/DropDownImages/PC/Creator PC Ultimate.webp"
-									alt="Creator PC Ultimate"
-								/>
-								<div className="card-info">
-									<h4 className="img-title">
-										Creator PC Ultimate
-									</h4>
-								</div>
-							</div>
+							{state.currentNavArray &&
+							state.currentNavArray.length > 0 ? (
+								state.currentNavArray.map((item) => (
+									<div className="dropdown-card">
+										<img src={item.src} alt={item.title} />
+										<div className="card-info">
+											<h2 className="img-title">
+												{item.title}
+											</h2>
+										</div>
+									</div>
+								))
+							) : (
+								<div></div>
+							)}
 						</div>
 
 						<div
@@ -196,46 +191,20 @@ const LandingPage = () => {
 							}}
 						>
 							<ul className="dropdown-ordered-list">
-								<li>
-									<Link to="/" className="dropdown-nav-link">
-										Alienware
-									</Link>
-								</li>
-								<li>
-									<Link to="/" className="dropdown-nav-link">
-										Asus ROG
-									</Link>
-								</li>
-								<li>
-									<Link to="/" className="dropdown-nav-link">
-										MSI
-									</Link>
-								</li>
-								<li>
-									<Link to="/" className="dropdown-nav-link">
-										Acer Predator
-									</Link>
-								</li>
-								<li>
-									<Link to="/" className="dropdown-nav-link">
-										HP Omen
-									</Link>
-								</li>
-								<li>
-									<Link to="/" className="dropdown-nav-link">
-										iBUYPOWER
-									</Link>
-								</li>
-								<li>
-									<Link to="/" className="dropdown-nav-link">
-										Corsair
-									</Link>
-								</li>
-								<li>
-									<Link to="/" className="dropdown-nav-link">
-										CyberPowerPC
-									</Link>
-								</li>
+								{dropdownLinksArray ? (
+									dropdownLinksArray.map((item) => (
+										<li>
+											<Link
+												to={item.href}
+												className="dropdown-nav-link"
+											>
+												{item.title}
+											</Link>
+										</li>
+									))
+								) : (
+									<></>
+								)}
 							</ul>
 						</div>
 					</div>
@@ -243,6 +212,7 @@ const LandingPage = () => {
 			</div>
 
 			<video
+				onMouseEnter={() => handleNavChange("")}
 				autoPlay
 				muted
 				loop
@@ -253,37 +223,38 @@ const LandingPage = () => {
 			<div
 				className="centered-container"
 				style={
-					hoveredItem !== null
+					state.currentNavArray && state.currentNavArray.length !== 0
 						? {
 								filter: "blur(20px)",
 								transition: "filter 1s ease",
-								display: "flex",
+								display: "grid",
 								justifyContent: "center",
-								alignItems: "center",
-						}
+								gridTemplateRows: "1fr 1fr",
+						  }
 						: {
 								display: "gird",
 								justifyContent: "center",
-								gridTemplateRows: '1fr 1fr'
-						}
+								gridTemplateRows: "1fr 1fr",
+						  }
 				}
 			>
 				<div>
 					<h1
 						style={
-							hoveredItem !== null
+							state.currentNavArray &&
+							state.currentNavArray.length !== 0
 								? {
 										filter: "blur(20px)",
 										transition: "filter 1s ease",
-								}
+								  }
 								: {
 										fontSize: "2rem",
 										fontWeight: "600",
 										color: "whitesmoke",
 										marginLeft: "auto",
 										marginRight: "auto",
-										width:"fit-content"
-								}
+										width: "fit-content",
+								  }
 						}
 					>
 						Frame Wins
@@ -291,16 +262,17 @@ const LandingPage = () => {
 				</div>
 				<h2
 					style={
-						hoveredItem !== null
+						state.currentNavArray &&
+						state.currentNavArray.length !== 0
 							? {
 									filter: "blur(20px)",
 									transition: "filter 1s ease",
-							}
+							  }
 							: {
 									fontSize: "1.2rem",
 									fontWeight: "500",
 									color: "whitesmoke",
-							}
+							  }
 					}
 				>
 					High FPS, Low Monthly Payments
@@ -310,7 +282,7 @@ const LandingPage = () => {
 			<div
 				className="bottom-container"
 				style={
-					hoveredItem !== null
+					state.currentNavArray && state.currentNavArray.length !== 0
 						? { filter: "blur(20px)", transition: "filter 1s ease" }
 						: {}
 				}

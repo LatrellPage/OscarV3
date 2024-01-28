@@ -11,6 +11,7 @@ img {
 	overflow: hidden;
 }
 
+
 h1 {
 	margin: 0;
 	padding: 0;
@@ -94,15 +95,18 @@ h1 {
 }
 
 .card-info{
-	padding: la5px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
 .img-title{
-	width: 100%;
+	width: fit-content;
 	font-size: 1rem;
 	font-weight: 600;
 	color: #333333d1;
 }
+
 
 .dropdown-ordered-list {
 	list-style-type: none;
