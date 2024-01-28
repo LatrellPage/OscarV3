@@ -44,7 +44,30 @@ export const accessories_SRC = [
 	},
 ];
 
-export const discover_SRC = [];
+
+export const discover_Links = [
+	{ title: "Store Information"},
+	{ title: "About Us", href:"" },
+	{ title: "Contact Us", href:"" },
+	{ title: "Upcoming Events", href:"" },
+	{ title: "Special Offers", href:"" },
+	{ title: "Customer Reviews", href:"" },
+	{ title: "FAQ", href:"" },
+	{ title: "Resources"},
+	{ title: "Build Your Pc", href:"" },
+	{ title: "Gaming Accessories", href:"" },
+	{ title: "Shop Online", href:"" },
+	{ title: "Warranty Information", href:"" },
+	{ title: "Gaming Community", href:"" },
+	{ title: "PC Troubleshooting", href:"" },
+	{ title: "Services"},
+	{ title: "Financing Options", href:"" },
+	{ title: "Repairs and Maintenance", href:"" },
+	{ title: "Gift Cards", href:"" },
+	{ title: "Returns and Exchanges", href:"" },
+	{ title: "Blog", href:"" },
+	{ title: "Live Chat Support", href:"" },
+];
 
 export const shop_SRC = [
 	{
@@ -69,6 +92,9 @@ export const shop_SRC = [
 	},
 ];
 
+
+
+
 // Nav Links in Navbar Below
 
 export const pcDropdownLinks = [
@@ -92,6 +118,7 @@ export const accessoriesDropdownLinks = [
     { title: "Desk", href: ""}
 ]
 
+
 export const shopDropdownLinks = [
     { title: "Apparel", href: ""},
     { title: "Gaming Glasses", href: ""},
@@ -100,5 +127,5 @@ export const shopDropdownLinks = [
     { title: "Posters", href: ""},
     { title: "Phone Cases", href: ""},
     { title: "Gaming Cups", href: ""},
-    { title: "COntroller Skins & Grips", href: ""}
+    { title: "Controller Skins & Grips", href: ""}
 ]

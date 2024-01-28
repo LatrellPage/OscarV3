@@ -1,5 +1,5 @@
 import React, { createContext, useReducer } from "react";
-import { pc_SRC, accessories_SRC, discover_SRC, shop_SRC } from "./NavResources";
+import { pc_SRC, accessories_SRC, discover_Links, shop_SRC } from "./NavResources";
 export const NavContext = createContext();
 
 export const NavProvider = ({ children }) => {
@@ -11,7 +11,7 @@ export const NavProvider = ({ children }) => {
             case "Accessories":
                 return {type: "Accessories", currentNavArray: accessories_SRC }
             case "Discover":
-                return {type: "Discover", currentNavArray: discover_SRC }
+                return {type: "Discover", currentNavArray: discover_Links}
             case "Shop":
                 return {type: "Shop", currentNavArray: shop_SRC}
             case "":
