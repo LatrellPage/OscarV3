@@ -113,7 +113,7 @@ h1 {
 }
 
 .dropdown-ordered-list li {
-	margin-top: 0.5rem;
+	margin-top: 0.6rem;
 }
 
 .dropdown-nav-link{
@@ -121,9 +121,22 @@ h1 {
 	color: black;
 	font-size: 0.8rem;
 	font-weight: 550;
+	margin-top: 0.5rem;
 }
 
 .dropdown-nav-link:hover{
+	border-bottom:3px solid black ;
+}
+
+.discover-dropdown-nav-link{
+	text-decoration: none;
+	color: black;
+	font-size: 0.8rem;
+	font-weight: 550;
+	width: fit-content;
+}
+
+.discover-dropdown-nav-link:hover{
 	border-bottom:3px solid black ;
 }
 

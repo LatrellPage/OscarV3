@@ -108,9 +108,12 @@ const LandingPage = () => {
 					}
 				>
 					<div className="svg-logo-container">
-						{state.currentNavArray && state.currentNavArray.length
-						!== 0 ? <BlackLogo className="svg-logo" />
-						: <WhiteLogo className="svg-logo" />}
+						{state.currentNavArray &&
+						state.currentNavArray.length !== 0 ? (
+							<BlackLogo className="svg-logo" />
+						) : (
+							<WhiteLogo className="svg-logo" />
+						)}
 					</div>
 					<NavElements />
 					<div className="icon-container">
@@ -148,65 +151,124 @@ const LandingPage = () => {
 					style={
 						state.currentNavArray &&
 						state.currentNavArray.length !== 0
-							? { height: "60vh", opacity: 1 }
+							? { height: state.type !== "Discover" ? "60vh" : "45vh", opacity: 1 }
 							: { height: "0vh", opacity: 0 }
 					}
 				>
 					<div className="dropdown-container">
-						<div
-							style={{
-								width: "80%",
-								height: "70%",
-								display: "grid",
-								gridTemplateColumns: "1fr 1fr 1fr 1fr",
-								gridTemplateRows: "auto",
-								gap: "1rem",
-								paddingRight: "15px",
-							}}
-						>
-							{state.currentNavArray &&
-							state.currentNavArray.length > 0 ? (
-								state.currentNavArray.map((item) => (
-									<div className="dropdown-card">
-										<img src={item.src} alt={item.title} />
-										<div className="card-info">
-											<h2 className="img-title">
-												{item.title}
-											</h2>
-										</div>
-									</div>
-								))
-							) : (
-								<div></div>
-							)}
-						</div>
+						{state.type === "Discover" ? (
+							<div
+								style={{
+									width: "100%",
+									height: "70%",
+									display: "flex",
+									justifyContent: "center",
+								}}
+							>
+								<div
+									style={{
+										display: "grid",
+										gridTemplateColumns: "1fr 1fr 1fr 1fr",
+										gridAutoColumns: "auto",
+										gap: 4,
+									}}
+								>
+									{state.currentNavArray &&
+									state.currentNavArray.length > 0 ? (
+										state.currentNavArray.map(
+											(section, sectionIndex) => (
+												<ul
+													key={sectionIndex}
+													className="dropdown-ordered-list"
+												>
+													{section.map(
+														(item, itemIndex) => (
+															<li
+																key={itemIndex}
+															>
+																{
+																	<Link className="discover-dropdown-nav-link"
+																		to={
+																			item.href
+																		}
+																	>
+																		{
+																			item.title
+																		}
+																	</Link>
+																}
+															</li>
+														)
+													)}
+												</ul>
+											)
+										)
+									) : (
+										<div></div>
+									)}
+								</div>
+							</div>
+						) : (
+							<>
+								<div
+									style={{
+										width: "80%",
+										height: "70%",
+										display: "grid",
+										gridTemplateColumns: "1fr 1fr 1fr 1fr",
+										gridTemplateRows: "auto",
+										gap: "1rem",
+										paddingRight: "15px",
+									}}
+								>
+									{state.currentNavArray &&
+									state.currentNavArray.length > 0 ? (
+										state.currentNavArray.map((item) => (
+											<div className="dropdown-card">
+												<img
+													src={item.src}
+													alt={item.title}
+												/>
+												<div className="card-info">
+													<h2 className="img-title">
+														{item.title}
+													</h2>
+												</div>
+											</div>
+										))
+									) : (
+										<div></div>
+									)}
+								</div>
 
-						<div
-							style={{
-								width: "20%",
-								height: "70%",
-								borderLeft: "0.5px solid #ddd",
-								marginLeft: "1rem",
-								padding: "10px",
-							}}
-						>
-							<ul className="dropdown-ordered-list">
-								{dropdownLinksArray ? (
-									dropdownLinksArray.map((item) => (
-										<li>
-											<Link
-												to={item.href}
-												className="dropdown-nav-link"
-											>
-												{item.title}
-											</Link>
-										</li>
-									))
-								) : (
-									<></>
-								)}
-							</ul>
-						</div>
+								<div
+									style={{
+										width: "20%",
+										height: "70%",
+										borderLeft: "0.5px solid #ddd",
+										marginLeft: "1rem",
+										padding: "10px",
+									}}
+								>
+									<ul className="dropdown-ordered-list">
+										{dropdownLinksArray ? (
+											dropdownLinksArray.map((item) => (
+												<li>
+													<Link
+														to={item.href}
+														className="dropdown-nav-link"
+													>
+														{item.title}
+													</Link>
+												</li>
+											))
+										) : (
+											<></>
+										)}
+									</ul>
+								</div>
+							</>
+						)}
 					</div>
 				</div>
 			</div>
