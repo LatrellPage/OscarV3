@@ -89,7 +89,7 @@ const SearchNavbar = () => {
 							display: "flex",
 							justifyContent: "center",
 							alignItems: "center",
-							backgroundColor: "#ddd",
+							backgroundColor: "#eee",
 							cursor: "pointer",
 						}}
 					>
