@@ -36,7 +36,7 @@ const SearchNavbar = () => {
 			>
 				<FontAwesomeIcon
 					icon={faArrowLeft}
-					style={{ color: "#ddd", fontSize: "2rem" }}
+					style={{ color: "#ddd", fontSize: "1.7rem" }}
 				/>
 				<div
 					style={{
