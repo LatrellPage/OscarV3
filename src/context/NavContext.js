@@ -1,5 +1,5 @@
 import React, { createContext, useReducer } from "react";
-import { pc_SRC, accessories_SRC, discover_Links, shop_SRC } from "./NavResources";
+import { pc_SRC, accessories_SRC, discover_Links, shop_SRC } from "../resources/NavResources";
 export const NavContext = createContext();
 
 export const NavProvider = ({ children }) => {

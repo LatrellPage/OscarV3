@@ -1,6 +1,9 @@
-import React from "react";
+import React, {useState} from "react";
 
 const SubTitleContainer = (prop) => {
+
+	const [ hover, setHover ] = useState();
+
 	return (
 		<>
 			<div
@@ -14,10 +17,11 @@ const SubTitleContainer = (prop) => {
 			>
 				{prop.contentArray.map((item, index) => (
 					<div
+					onMouseEnter={() => setHover(index)}
 						key={index}
 						style={{
-							backgroundColor: "#eee",
-							color: "black",
+							backgroundColor: hover === index ?"black": "#eee",
+							color: hover === index ? "white" : "black",
 							width: "fit-content",
 							height: "0.6rem",
 							padding: "10px",
@@ -26,6 +30,7 @@ const SubTitleContainer = (prop) => {
 							borderRadius: "7px",
 							fontSize: "0.7rem",
 							fontWeight: "600",
+							cursor: "pointer"
 						}}
 					>
 						{item}

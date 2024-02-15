@@ -13,7 +13,7 @@ import {
 	pcDropdownLinks,
 	accessoriesDropdownLinks,
 	shopDropdownLinks,
-} from "../context/NavResources";
+} from "../resources/NavResources";
 
 library.add(faMagnifyingGlass, faCircleUser);
 
